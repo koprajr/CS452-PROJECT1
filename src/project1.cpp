@@ -42,6 +42,7 @@ GLdouble zCamera = 4.0;
 
 GLubyte sphereTexture[1024][1024][3];
 GLubyte planeTexture[1024][1024][3];
+GLubyte holeTexture[1024][1024][3];
 
 /*
 Black Holes
@@ -104,7 +105,7 @@ void display() {
 	 */
 	glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
+	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_01, yHole_01, zHole_01);
 	glMultMatrixd(hole_01_Angles);
 	gluSphere(hole01, 0.15, 50, 50);
@@ -113,7 +114,7 @@ void display() {
 
 	glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
+	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_02, yHole_02, zHole_02);
 	glMultMatrixd(hole_02_Angles);
 	gluSphere(hole02, 0.15, 50, 50);
@@ -294,6 +295,19 @@ void init() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	fs.open("earth.ppm");
+	fs.getline(temp, 80);
+	fs.getline(temp, 80);
+	fs.getline(temp, 80);
+	for( i = 0; i < 1024; i++ ) {
+		for( j = 0; j < 1024; j++ ) {
+			sphereTexture[i][1023-j][0] = (GLubyte) fs.get();
+			sphereTexture[i][1023-j][1] = (GLubyte) fs.get();
+			sphereTexture[i][1023-j][2] = (GLubyte) fs.get();
+		}
+	}
+	fs.close();
+
+	fs.open("blackHole.ppm");
 	fs.getline(temp, 80);
 	fs.getline(temp, 80);
 	fs.getline(temp, 80);
