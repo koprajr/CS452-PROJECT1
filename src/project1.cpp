@@ -122,7 +122,7 @@ void display() {
 	glPopMatrix();
 
 
-	GLdouble angle = 15.00;
+	GLdouble angle = 00.00; //15.00
 	if( xHole_01 > (GLfloat) -2.00 ) {
 		xHole_01 -= 0.0175f;
 
@@ -136,7 +136,11 @@ void display() {
 		glPopMatrix();
 	} else {
 		xHole_01 = 2.0;
-		zHole_01 = (rand() % (200-0)) / 100.0;
+		
+		zHole_01 = (rand() % (150-0)) / 100.0;
+		if ( (rand() % 2) == 0){ 
+			zHole_01 = zHole_01 * (-1);
+		}
 
 		glPushMatrix();
 
@@ -161,7 +165,11 @@ void display() {
 		glPopMatrix();
 	} else {
 		xHole_02 = 2.0;
-		zHole_02 = (rand() % (200-0)) / 100.0;
+		
+		zHole_02 = (rand() % (150-0)) / 100.0;
+		if ( (rand() % 2) == 0){ 
+			zHole_02 = zHole_02 * (-1);
+		}
 
 		glPushMatrix();
 
