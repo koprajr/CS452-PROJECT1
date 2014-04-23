@@ -3,6 +3,10 @@
  * CS452
  * Graphics
  * Project 1
+ *
+ * Compile Using:
+ *	g++ -Wall -o run-me project1.cpp -lGL -lGLU -lglut
+ *
  */
 #include <GL/glut.h>
 #include <cstdlib>
