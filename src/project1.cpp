@@ -380,7 +380,6 @@ void display() {
 		glColor3f(0.0, 1.0, 0.0);
 		glRasterPos2i(10, 10);
 
-		int a = 10;
 		stringstream ss;
 		ss << score;
 		string s = ss.str();
