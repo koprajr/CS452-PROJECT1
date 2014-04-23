@@ -121,14 +121,14 @@ void display() {
 	glPopMatrix();
 
 
-	GLdouble angle = 26.625;
+	GLdouble angle = 15.00;
 	if( xHole_01 > (GLfloat) -2.00 ) {
 		xHole_01 -= 0.0175f;
 
 		glPushMatrix();
 
 		glLoadIdentity();
-		glRotated(angle,0,0,1.0);
+		glRotated(angle,0,1.0,0);
 		glMultMatrixd(hole_01_Angles);
 		glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
 
@@ -140,7 +140,7 @@ void display() {
 		glPushMatrix();
 
 		glLoadIdentity();
-		glRotated(-angle,0,0,2.0);
+		glRotated(-angle,0,2.0,0);
 		glMultMatrixd(hole_01_Angles);
 		glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
 
@@ -153,7 +153,7 @@ void display() {
 		glPushMatrix();
 
 		glLoadIdentity();
-		glRotated(angle,0,0,1.0);
+		glRotated(angle,0,1.0,0);
 		glMultMatrixd(hole_02_Angles);
 		glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
 
@@ -165,7 +165,7 @@ void display() {
 		glPushMatrix();
 
 		glLoadIdentity();
-		glRotated(-angle,0,0,2.0);
+		glRotated(-angle,0,2.0,0);
 		glMultMatrixd(hole_02_Angles);
 		glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
 
