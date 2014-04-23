@@ -121,7 +121,7 @@ void display() {
 	glPopMatrix();
 
 
-	GLdouble angle = 5.625;
+	GLdouble angle = 26.625;
 	if( xHole_01 > (GLfloat) -2.00 ) {
 		xHole_01 -= 0.0175f;
 
