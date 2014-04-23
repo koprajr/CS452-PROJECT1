@@ -379,7 +379,13 @@ void display() {
 		glLoadIdentity();
 		glColor3f(0.0, 1.0, 0.0);
 		glRasterPos2i(10, 10);
-		string s = "Game Over, your score is:" + lexical_cast<string>(score);
+
+		int a = 10;
+		stringstream ss;
+		ss << score;
+		string s = ss.str();
+
+		//string s = "Game Over, your score is:" + lexical_cast<string>(score);
 		void * font = GLUT_BITMAP_9_BY_15;
 		for (string::iterator i = s.begin(); i != s.end(); ++i)
 		{
