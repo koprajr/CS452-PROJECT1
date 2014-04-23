@@ -136,7 +136,7 @@ void display() {
 		glPopMatrix();
 	} else {
 		xHole_01 = 2.0;
-		zHole_01 += 0.1;
+		zHole_01 = (rand() % (200-0)) / 100.0;
 
 		glPushMatrix();
 
@@ -161,7 +161,7 @@ void display() {
 		glPopMatrix();
 	} else {
 		xHole_02 = 2.0;
-		zHole_02 += 0.1;
+		zHole_02 = (rand() % (200-0)) / 100.0;
 
 		glPushMatrix();
 
@@ -313,9 +313,9 @@ void init() {
 	fs.getline(temp, 80);
 	for( i = 0; i < 1024; i++ ) {
 		for( j = 0; j < 1024; j++ ) {
-			sphereTexture[i][1023-j][0] = (GLubyte) fs.get();
-			sphereTexture[i][1023-j][1] = (GLubyte) fs.get();
-			sphereTexture[i][1023-j][2] = (GLubyte) fs.get();
+			holeTexture[i][1023-j][0] = (GLubyte) fs.get();
+			holeTexture[i][1023-j][1] = (GLubyte) fs.get();
+			holeTexture[i][1023-j][2] = (GLubyte) fs.get();
 		}
 	}
 	fs.close();
