@@ -58,7 +58,7 @@ GLdouble hole_01_Angles[16];
 
 GLUquadricObj* hole02;
 GLfloat rHole_02 = 0.10;
-GLfloat sHole_02 = 0.0;
+GLfloat sHole_02 = 0.0105f;
 GLfloat xHole_02 = 3.0;
 GLfloat yHole_02 = 0.15;
 GLfloat zHole_02 = -0.5;
@@ -66,7 +66,7 @@ GLdouble hole_02_Angles[16];
 
 GLUquadricObj* hole03;
 GLfloat rHole_03 = 0.25;
-GLfloat sHole_03 = 0.0;
+GLfloat sHole_03 = 0.0125f;
 GLfloat xHole_03 = 4.1;
 GLfloat yHole_03 = 0.15;
 GLfloat zHole_03 = -1.0;
@@ -74,7 +74,7 @@ GLdouble hole_03_Angles[16];
 
 GLUquadricObj* hole04;
 GLfloat rHole_04 = 0.35;
-GLfloat sHole_04 = 0.0;
+GLfloat sHole_04 = 0.0125f;
 GLfloat xHole_04 = 2.0;
 GLfloat yHole_04 = 0.15;
 GLfloat zHole_04 = 0.8;
@@ -238,7 +238,7 @@ void display() {
 				zHole_01 = zHole_01 * (-1);
 			}
 
-			sHole_01 = (rand() % (20000-10000)) / 1000000.0;
+			sHole_01 = (rand() % (20000-10000)) / 100000.0;
 
 			glPushMatrix();
 
@@ -251,7 +251,7 @@ void display() {
 		}
 
 		if( xHole_02 > (GLfloat) -2.00 ) {
-			xHole_02 -= 0.0105f;
+			xHole_02 -= sHole_02;
 
 			glPushMatrix();
 
@@ -269,6 +269,8 @@ void display() {
 				zHole_02 = zHole_02 * (-1);
 			}
 
+			sHole_02 = (rand() % (20000-10000)) / 100000.0;
+
 			glPushMatrix();
 
 			glLoadIdentity();
@@ -280,7 +282,7 @@ void display() {
 		}
 
 		if( xHole_03 > (GLfloat) -2.00 ) {
-			xHole_03 -= 0.0125f;
+			xHole_03 -= sHole_03;
 
 			glPushMatrix();
 
@@ -298,6 +300,8 @@ void display() {
 				zHole_03 = zHole_03 * (-1);
 			}
 
+			sHole_03 = (rand() % (20000-10000)) / 100000.0;
+
 			glPushMatrix();
 
 			glLoadIdentity();
@@ -309,7 +313,7 @@ void display() {
 		}
 
 		if( xHole_04 > (GLfloat) -2.00 ) {
-			xHole_04 -= 0.0105f;
+			xHole_04 -= sHole_04;
 
 			glPushMatrix();
 
@@ -326,6 +330,8 @@ void display() {
 			if ( (rand() % 2) == 0){ 
 				zHole_04 = zHole_04 * (-1);
 			}
+
+			sHole_04 = (rand() % (20000-10000)) / 100000.0;
 
 			glPushMatrix();
 
