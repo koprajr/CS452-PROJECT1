@@ -372,7 +372,7 @@ void display() {
 		glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
 		glLoadIdentity();
-		gluOrtho2D(0.0, WIN_WIDTH, 0.0, WIN_HEIGHT);
+		gluOrtho2D(0.0, 1024, 0.0, 1024);
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
