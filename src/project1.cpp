@@ -76,6 +76,8 @@ GLfloat yHole_04 = 0.15;
 GLfloat zHole_04 = 0.8;
 GLdouble hole_04_Angles[16];
 
+bool dead = false;
+
 
 
 //  Just a pointer to a font style..
@@ -139,214 +141,215 @@ void display() {
 	gluLookAt(xCamera, yCamera, zCamera, 0, 0, 0, 0, 1, 0);
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 
+
 	/*
 	 * Build the Sphere
 	 */
-	glPushMatrix();
+	 if (!dead) {
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
-	glTranslatef(xSphere, ySphere, zSphere);
-	glMultMatrixd(sphereAngles);
-	gluSphere(sphere, 0.15, 50, 50);
+		glPushMatrix();
 
-	glPopMatrix();
+		glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
+		glTranslatef(xSphere, ySphere, zSphere);
+		glMultMatrixd(sphereAngles);
+		gluSphere(sphere, 0.15, 50, 50);
 
-	/* Build the surface */
-	glPushMatrix();
+		glPopMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, planeTexture);
-	glBegin(GL_POLYGON);
-	glTexCoord2f(0, 0);
-	glVertex3f(1.5, 0, 1.5);
-	glTexCoord2f(0, 1.0);
-	glVertex3f(1.5, 0, -1.5);
-	glTexCoord2f(1.0, 1.0);
-	glVertex3f(-1.5, 0, -1.5);
-	glTexCoord2f(1.0, 0);
-	glVertex3f(-1.5, 0, 1.5);
-	glEnd();
+		/* Build the surface */
+		glPushMatrix();
 
-	glPopMatrix();
+		glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, planeTexture);
+		glBegin(GL_POLYGON);
+		glTexCoord2f(0, 0);
+		glVertex3f(1.5, 0, 1.5);
+		glTexCoord2f(0, 1.0);
+		glVertex3f(1.5, 0, -1.5);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(-1.5, 0, -1.5);
+		glTexCoord2f(1.0, 0);
+		glVertex3f(-1.5, 0, 1.5);
+		glEnd();
+
+		glPopMatrix();
 
 
-	/*
-	 * Build the Black Holes
-	 */
-	glPushMatrix();
+		/*
+		 * Build the Black Holes
+		 */
+		glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
-	glTranslatef(xHole_01, yHole_01, zHole_01);
-	glMultMatrixd(hole_01_Angles);
-	gluSphere(hole01, rHole_01, 50, 50);
+		glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+		glTranslatef(xHole_01, yHole_01, zHole_01);
+		glMultMatrixd(hole_01_Angles);
+		gluSphere(hole01, rHole_01, 50, 50);
 
-	glPopMatrix();
+		glPopMatrix();
 
-	glPushMatrix();
+		glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
-	glTranslatef(xHole_02, yHole_02, zHole_02);
-	glMultMatrixd(hole_02_Angles);
-	gluSphere(hole02, rHole_02, 50, 50);
+		glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+		glTranslatef(xHole_02, yHole_02, zHole_02);
+		glMultMatrixd(hole_02_Angles);
+		gluSphere(hole02, rHole_02, 50, 50);
 
-	glPopMatrix();
+		glPopMatrix();
 
-	glPushMatrix();
+		glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
-	glTranslatef(xHole_03, yHole_03, zHole_03);
-	glMultMatrixd(hole_03_Angles);
-	gluSphere(hole03, rHole_03, 50, 50);
+		glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+		glTranslatef(xHole_03, yHole_03, zHole_03);
+		glMultMatrixd(hole_03_Angles);
+		gluSphere(hole03, rHole_03, 50, 50);
 
-	glPopMatrix();
+		glPopMatrix();
 
-	glPushMatrix();
+		glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
-	glTranslatef(xHole_04, yHole_04, zHole_04);
-	glMultMatrixd(hole_04_Angles);
-	gluSphere(hole04, rHole_04, 50, 50);
+		glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+		glTranslatef(xHole_04, yHole_04, zHole_04);
+		glMultMatrixd(hole_04_Angles);
+		gluSphere(hole04, rHole_04, 50, 50);
 
-	glPopMatrix();
+		glPopMatrix();
 
-	bool dead = intersect();
-	if (dead) {
-		while (1) {
+		dead = intersect();
+
+		GLdouble angle = 10.00; //15.00
+		if( xHole_01 > (GLfloat) -2.00 ) {
+			xHole_01 -= 0.0175f;
+
 			glPushMatrix();
 
-			glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, planeTextureEND);
-			glBegin(GL_POLYGON);
-			glTexCoord2f(0, 0);
-			glVertex3f(1.5, 0, 1.5);
-			glTexCoord2f(0, 1.0);
-			glVertex3f(1.5, 0, -1.5);
-			glTexCoord2f(1.0, 1.0);
-			glVertex3f(-1.5, 0, -1.5);
-			glTexCoord2f(1.0, 0);
-			glVertex3f(-1.5, 0, 1.5);
-			glEnd();
+			glLoadIdentity();
+			glRotated(angle,0,1.0,0);
+			glMultMatrixd(hole_01_Angles);
+			glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
+
+			glPopMatrix();
+		} else {
+			xHole_01 = 2.0;
+			
+			zHole_01 = (rand() % (150-0)) / 100.0;
+			if ( (rand() % 2) == 0){ 
+				zHole_01 = zHole_01 * (-1);
+			}
+
+			glPushMatrix();
+
+			glLoadIdentity();
+			glRotated(-angle,0,2.0,0);
+			glMultMatrixd(hole_01_Angles);
+			glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
 
 			glPopMatrix();
 		}
 
-		glFlush();
-	}
+		if( xHole_02 > (GLfloat) -2.00 ) {
+			xHole_02 -= 0.0105f;
 
+			glPushMatrix();
 
-	GLdouble angle = 10.00; //15.00
-	if( xHole_01 > (GLfloat) -2.00 ) {
-		xHole_01 -= 0.0175f;
+			glLoadIdentity();
+			glRotated(angle,0,1.0,0);
+			glMultMatrixd(hole_02_Angles);
+			glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
 
-		glPushMatrix();
+			glPopMatrix();
+		} else {
+			xHole_02 = 2.0;
+			
+			zHole_02 = (rand() % (150-0)) / 100.0;
+			if ( (rand() % 2) == 0){ 
+				zHole_02 = zHole_02 * (-1);
+			}
 
-		glLoadIdentity();
-		glRotated(angle,0,1.0,0);
-		glMultMatrixd(hole_01_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
+			glPushMatrix();
 
-		glPopMatrix();
-	} else {
-		xHole_01 = 2.0;
-		
-		zHole_01 = (rand() % (150-0)) / 100.0;
-		if ( (rand() % 2) == 0){ 
-			zHole_01 = zHole_01 * (-1);
+			glLoadIdentity();
+			glRotated(-angle,0,2.0,0);
+			glMultMatrixd(hole_02_Angles);
+			glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
+
+			glPopMatrix();
 		}
 
-		glPushMatrix();
+		if( xHole_03 > (GLfloat) -2.00 ) {
+			xHole_03 -= 0.0125f;
 
-		glLoadIdentity();
-		glRotated(-angle,0,2.0,0);
-		glMultMatrixd(hole_01_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
+			glPushMatrix();
 
-		glPopMatrix();
-	}
+			glLoadIdentity();
+			glRotated(angle,0,1.0,0);
+			glMultMatrixd(hole_03_Angles);
+			glGetDoublev(GL_MODELVIEW_MATRIX, hole_03_Angles);
 
-	if( xHole_02 > (GLfloat) -2.00 ) {
-		xHole_02 -= 0.0105f;
+			glPopMatrix();
+		} else {
+			xHole_03 = 2.0;
+			
+			zHole_03 = (rand() % (150-0)) / 100.0;
+			if ( (rand() % 2) == 0){ 
+				zHole_03 = zHole_03 * (-1);
+			}
 
-		glPushMatrix();
+			glPushMatrix();
 
-		glLoadIdentity();
-		glRotated(angle,0,1.0,0);
-		glMultMatrixd(hole_02_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
+			glLoadIdentity();
+			glRotated(-angle,0,2.0,0);
+			glMultMatrixd(hole_03_Angles);
+			glGetDoublev(GL_MODELVIEW_MATRIX, hole_03_Angles);
 
-		glPopMatrix();
-	} else {
-		xHole_02 = 2.0;
-		
-		zHole_02 = (rand() % (150-0)) / 100.0;
-		if ( (rand() % 2) == 0){ 
-			zHole_02 = zHole_02 * (-1);
+			glPopMatrix();
 		}
 
-		glPushMatrix();
+		if( xHole_04 > (GLfloat) -2.00 ) {
+			xHole_04 -= 0.0105f;
 
-		glLoadIdentity();
-		glRotated(-angle,0,2.0,0);
-		glMultMatrixd(hole_02_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
+			glPushMatrix();
 
-		glPopMatrix();
-	}
+			glLoadIdentity();
+			glRotated(angle,0,1.0,0);
+			glMultMatrixd(hole_04_Angles);
+			glGetDoublev(GL_MODELVIEW_MATRIX, hole_04_Angles);
 
-	if( xHole_03 > (GLfloat) -2.00 ) {
-		xHole_03 -= 0.0125f;
+			glPopMatrix();
+		} else {
+			xHole_04 = 2.0;
+			
+			zHole_04 = (rand() % (150-0)) / 100.0;
+			if ( (rand() % 2) == 0){ 
+				zHole_04 = zHole_04 * (-1);
+			}
 
-		glPushMatrix();
+			glPushMatrix();
 
-		glLoadIdentity();
-		glRotated(angle,0,1.0,0);
-		glMultMatrixd(hole_03_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_03_Angles);
+			glLoadIdentity();
+			glRotated(-angle,0,2.0,0);
+			glMultMatrixd(hole_04_Angles);
+			glGetDoublev(GL_MODELVIEW_MATRIX, hole_04_Angles);
 
-		glPopMatrix();
-	} else {
-		xHole_03 = 2.0;
-		
-		zHole_03 = (rand() % (150-0)) / 100.0;
-		if ( (rand() % 2) == 0){ 
-			zHole_03 = zHole_03 * (-1);
+			glPopMatrix();
 		}
 
-		glPushMatrix();
-
-		glLoadIdentity();
-		glRotated(-angle,0,2.0,0);
-		glMultMatrixd(hole_03_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_03_Angles);
-
-		glPopMatrix();
-	}
-
-	if( xHole_04 > (GLfloat) -2.00 ) {
-		xHole_04 -= 0.0105f;
-
-		glPushMatrix();
-
-		glLoadIdentity();
-		glRotated(angle,0,1.0,0);
-		glMultMatrixd(hole_04_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_04_Angles);
-
-		glPopMatrix();
 	} else {
-		xHole_04 = 2.0;
-		
-		zHole_04 = (rand() % (150-0)) / 100.0;
-		if ( (rand() % 2) == 0){ 
-			zHole_04 = zHole_04 * (-1);
-		}
 
 		glPushMatrix();
 
-		glLoadIdentity();
-		glRotated(-angle,0,2.0,0);
-		glMultMatrixd(hole_04_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_04_Angles);
-
+		glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, planeTextureEND);
+		glBegin(GL_POLYGON);
+		glTexCoord2f(0, 0);
+		glVertex3f(1.5, 0, 1.5);
+		glTexCoord2f(0, 1.0);
+		glVertex3f(1.5, 0, -1.5);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(-1.5, 0, -1.5);
+		glTexCoord2f(1.0, 0);
+		glVertex3f(-1.5, 0, 1.5);
+		glEnd();
+		
 		glPopMatrix();
+
 	}
 
 
