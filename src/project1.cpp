@@ -40,6 +40,7 @@ GLUquadricObj* hole05;
 GLfloat xSphere = 0.0;
 GLfloat ySphere = 0.15;
 GLfloat zSphere = 0.0;
+GLdouble sphereAngles[16];
 
 GLdouble xCamera = 0.0;
 GLdouble yCamera = 150.0;
@@ -47,32 +48,31 @@ GLdouble zCamera = 4.0;
 
 GLubyte sphereTexture[1024][1024][3];
 GLubyte planeTexture[1024][1024][3];
-GLubyte blockTexture[100][50][3];
 
-GLdouble sphereAngles[16];
-
-
+/*
+Black Holes
+*/
 GLfloat xHole_01 = 1.0;
 GLfloat yHole_01 = 0.15;
 GLfloat zHole_01 = 0.1;
 GLdouble hole_01_Angles[16];
 
-GLfloat xHole_02 = 1.65;
+GLfloat xHole_02 = 1.0;
 GLfloat yHole_02 = 0.15;
 GLfloat zHole_02 = 0.3;
 GLdouble hole_02_Angles[16];
 
-GLfloat xHole_03 = 1.75;
+GLfloat xHole_03 = 1.0;
 GLfloat yHole_03 = 0.15;
 GLfloat zHole_03 = 0.35;
 GLdouble hole_03_Angles[16];
 
-GLfloat xHole_04 = 1.32;
+GLfloat xHole_04 = 1.0;
 GLfloat yHole_04 = 0.15;
 GLfloat zHole_04 = 0.4;
 GLdouble hole_04_Angles[16];
 
-GLfloat xHole_05 = 1.45;
+GLfloat xHole_05 = 1.0;
 GLfloat yHole_05 = 0.15;
 GLfloat zHole_05 = 0.7;
 GLdouble hole_05_Angles[16];
@@ -125,7 +125,7 @@ void display() {
 	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
 	glTranslatef(xHole_01, yHole_01, zHole_01);
 	glMultMatrixd(hole_01_Angles);
-	gluSphere(hole01, 0.05, 10, 10);
+	gluSphere(hole01, 0.15, 50, 50);
 
 	glPopMatrix();
 	//
@@ -134,7 +134,7 @@ void display() {
 	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
 	glTranslatef(xHole_02, yHole_02, zHole_02);
 	glMultMatrixd(hole_02_Angles);
-	gluSphere(hole02, 0.05, 10, 10);
+	gluSphere(hole02, 0.15, 50, 50);
 
 	glPopMatrix();
 	//
@@ -143,7 +143,7 @@ void display() {
 	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
 	glTranslatef(xHole_03, yHole_03, zHole_03);
 	glMultMatrixd(hole_03_Angles);
-	gluSphere(hole03, 0.05, 10, 10);
+	gluSphere(hole03, 0.15, 50, 50);
 
 	glPopMatrix();
 	//
@@ -152,7 +152,7 @@ void display() {
 	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
 	glTranslatef(xHole_04, yHole_04, zHole_04);
 	glMultMatrixd(hole_04_Angles);
-	gluSphere(hole04, 0.05, 10, 10);
+	gluSphere(hole04, 0.15, 50, 50);
 
 	glPopMatrix();
 	//
@@ -161,7 +161,7 @@ void display() {
 	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
 	glTranslatef(xHole_05, yHole_05, zHole_05);
 	glMultMatrixd(hole_05_Angles);
-	gluSphere(hole05, 0.05, 10, 10);
+	gluSphere(hole05, 0.15, 50, 50);
 
 	glPopMatrix();
 
@@ -440,9 +440,9 @@ int main(int argc, char **argv) {
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	
-	while (1) {
+	/*while (1) {
 		moveBlackHoles();
-	}
+	}*/
 
 	glutMainLoop();
 
