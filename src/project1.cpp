@@ -161,7 +161,7 @@ void display() {
 	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
 	glTranslatef(xHole_05, yHole_05, zHole_05);
 	glMultMatrixd(hole_05_Angles);
-	gluSphere(hole06, 0.05, 10, 10);
+	gluSphere(hole05, 0.05, 10, 10);
 
 	glPopMatrix();
 
@@ -439,7 +439,12 @@ int main(int argc, char **argv) {
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
-	glutMainLoop(moveBlackHoles);
+	
+	while (1) {
+		moveBlackHoles();
+	}
+
+	glutMainLoop();
 
 	return 0;
 }
