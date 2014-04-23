@@ -31,8 +31,6 @@ using namespace std;
 
 GLUquadricObj* sphere;
 
-GLUquadricObj* hole01;
-
 GLfloat xSphere = 0.0;
 GLfloat ySphere = 0.15;
 GLfloat zSphere = 0.0;
@@ -48,10 +46,17 @@ GLubyte planeTexture[1024][1024][3];
 /*
 Black Holes
 */
+GLUquadricObj* hole01;
 GLfloat xHole_01 = 2.5;
 GLfloat yHole_01 = 0.15;
 GLfloat zHole_01 = 0.1;
 GLdouble hole_01_Angles[16];
+
+GLUquadricObj* hole02;
+GLfloat xHole_02 = 3.0;
+GLfloat yHole_02 = 0.55;
+GLfloat zHole_02 = 0.1;
+GLdouble hole_02_Angles[16];
 
 
 
@@ -106,10 +111,19 @@ void display() {
 
 	glPopMatrix();
 
+	glPushMatrix();
+
+	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, sphereTexture);
+	glTranslatef(xHole_02, yHole_02, zHole_02);
+	glMultMatrixd(hole_02_Angles);
+	gluSphere(hole02, 0.15, 50, 50);
+
+	glPopMatrix();
+
 
 	GLdouble angle = 5.625;
 	if( xHole_01 > (GLfloat) -2.00 ) {
-		xHole_01 -= 0.0005f;
+		xHole_01 -= 0.0075f;
 
 		glPushMatrix();
 
@@ -120,7 +134,7 @@ void display() {
 
 		glPopMatrix();
 	} else {
-		xHole_01 += 1.0000f;
+		xHole_01 = 2.0;
 
 		glPushMatrix();
 
@@ -128,6 +142,30 @@ void display() {
 		glRotated(-angle,0,0,2.0);
 		glMultMatrixd(hole_01_Angles);
 		glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
+
+		glPopMatrix();
+	}
+
+	if( xHole_02 > (GLfloat) -2.00 ) {
+		xHole_02 -= 0.0075f;
+
+		glPushMatrix();
+
+		glLoadIdentity();
+		glRotated(angle,0,0,1.0);
+		glMultMatrixd(hole_02_Angles);
+		glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
+
+		glPopMatrix();
+	} else {
+		xHole_02 = 2.0;
+
+		glPushMatrix();
+
+		glLoadIdentity();
+		glRotated(-angle,0,0,2.0);
+		glMultMatrixd(hole_02_Angles);
+		glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
 
 		glPopMatrix();
 	}
@@ -308,6 +346,18 @@ void init() {
 
 	glLoadIdentity();
 	glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
+
+	glPopMatrix();
+
+	hole02 = gluNewQuadric();
+	gluQuadricDrawStyle(hole02, GLU_FILL);
+	gluQuadricNormals(hole02, GLU_SMOOTH);
+	gluQuadricTexture(hole02, GL_TRUE);
+
+	glPushMatrix();
+
+	glLoadIdentity();
+	glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
 
 	glPopMatrix();
 
