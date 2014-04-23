@@ -366,7 +366,8 @@ void display() {
 
 		glPopMatrix();
 
-		fprintf(stderr,"Game Over, your score is: %d \n",score);
+		//fprintf(stderr,"Game Over, your score is: %d \n",score);
+		std::cout<<"Game Over, your score is: "<<score<<"\n\n";
 
 	}
 
