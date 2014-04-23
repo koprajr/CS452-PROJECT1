@@ -65,7 +65,7 @@ GLfloat yHole_03 = 0.15;
 GLfloat zHole_03 = -1.0;
 GLdouble hole_03_Angles[16];
 
-GLUquadricObj* hole02;
+GLUquadricObj* hole04;
 GLfloat xHole_04 = 2.0;
 GLfloat yHole_04 = 0.15;
 GLfloat zHole_04 = 0.8;
