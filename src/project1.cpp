@@ -48,7 +48,7 @@ GLubyte planeTexture[1024][1024][3];
 /*
 Black Holes
 */
-GLfloat xHole_01 = 0.5;
+GLfloat xHole_01 = 2.5;
 GLfloat yHole_01 = 0.15;
 GLfloat zHole_01 = 0.1;
 GLdouble hole_01_Angles[16];
@@ -108,8 +108,8 @@ void display() {
 
 
 	GLdouble angle = 5.625;
-	if( xHole_01 > (GLfloat) -1.35 ) {
-		xHole_01 -= 0.0375f;
+	if( xHole_01 > (GLfloat) -2.00 ) {
+		xHole_01 -= 0.0005f;
 
 		glPushMatrix();
 
@@ -125,7 +125,7 @@ void display() {
 		glPushMatrix();
 
 		glLoadIdentity();
-		glRotated(-angle,0,0,1.0);
+		glRotated(-angle,0,0,2.0);
 		glMultMatrixd(hole_01_Angles);
 		glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
 
@@ -133,7 +133,7 @@ void display() {
 	}
 
 
-	
+
 
 
 	glutSwapBuffers();
