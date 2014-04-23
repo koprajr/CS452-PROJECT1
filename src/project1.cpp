@@ -42,7 +42,7 @@ GLdouble zCamera = 4.0;
 
 GLubyte sphereTexture[1024][1024][3];
 GLubyte planeTexture[1024][1024][3];
-GLubyte holeTexture[100][100][3];
+GLubyte holeTexture[1024][1024][3];
 
 /*
 Black Holes
@@ -117,7 +117,7 @@ void display() {
 	 */
 	glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,100,100,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_01, yHole_01, zHole_01);
 	glMultMatrixd(hole_01_Angles);
 	gluSphere(hole01, 0.15, 50, 50);
@@ -126,28 +126,28 @@ void display() {
 
 	glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,100,100,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_02, yHole_02, zHole_02);
 	glMultMatrixd(hole_02_Angles);
-	gluSphere(hole02, 0.15, 50, 50);
+	gluSphere(hole02, 0.10, 50, 50);
 
 	glPopMatrix();
 
 	glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,100,100,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_03, yHole_03, zHole_03);
 	glMultMatrixd(hole_03_Angles);
-	gluSphere(hole03, 0.15, 50, 50);
+	gluSphere(hole03, 0.25, 50, 50);
 
 	glPopMatrix();
 
 	glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,100,100,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_04, yHole_04, zHole_04);
 	glMultMatrixd(hole_04_Angles);
-	gluSphere(hole04, 0.15, 50, 50);
+	gluSphere(hole04, 0.35, 50, 50);
 
 	glPopMatrix();
 
@@ -234,8 +234,8 @@ void display() {
 
 		glLoadIdentity();
 		glRotated(-angle,0,2.0,0);
-		glMultMatrixd(hole_02_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
+		glMultMatrixd(hole_03_Angles);
+		glGetDoublev(GL_MODELVIEW_MATRIX, hole_03_Angles);
 
 		glPopMatrix();
 	}
@@ -407,11 +407,11 @@ void init() {
 	fs.getline(temp, 80);
 	fs.getline(temp, 80);
 	fs.getline(temp, 80);
-	for( i = 0; i < 100; i++ ) {
-		for( j = 0; j < 100; j++ ) {
-			holeTexture[i][99-j][0] = (GLubyte) fs.get();
-			holeTexture[i][99-j][1] = (GLubyte) fs.get();
-			holeTexture[i][99-j][2] = (GLubyte) fs.get();
+	for( i = 0; i < 1024; i++ ) {
+		for( j = 0; j < 1024; j++ ) {
+			holeTexture[i][1023-j][0] = (GLubyte) fs.get();
+			holeTexture[i][1023-j][1] = (GLubyte) fs.get();
+			holeTexture[i][1023-j][2] = (GLubyte) fs.get();
 		}
 	}
 	fs.close();
