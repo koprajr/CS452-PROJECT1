@@ -49,13 +49,13 @@ Black Holes
 GLUquadricObj* hole01;
 GLfloat xHole_01 = 2.5;
 GLfloat yHole_01 = 0.15;
-GLfloat zHole_01 = 0.1;
+GLfloat zHole_01 = 0.3;
 GLdouble hole_01_Angles[16];
 
 GLUquadricObj* hole02;
 GLfloat xHole_02 = 3.0;
-GLfloat yHole_02 = 0.55;
-GLfloat zHole_02 = 0.1;
+GLfloat yHole_02 = 0.15;
+GLfloat zHole_02 = -0.5;
 GLdouble hole_02_Angles[16];
 
 
@@ -123,7 +123,7 @@ void display() {
 
 	GLdouble angle = 5.625;
 	if( xHole_01 > (GLfloat) -2.00 ) {
-		xHole_01 -= 0.0075f;
+		xHole_01 -= 0.0175f;
 
 		glPushMatrix();
 
@@ -135,6 +135,7 @@ void display() {
 		glPopMatrix();
 	} else {
 		xHole_01 = 2.0;
+		zHole_01 += 0.1;
 
 		glPushMatrix();
 
@@ -147,7 +148,7 @@ void display() {
 	}
 
 	if( xHole_02 > (GLfloat) -2.00 ) {
-		xHole_02 -= 0.0075f;
+		xHole_02 -= 0.0105f;
 
 		glPushMatrix();
 
@@ -159,6 +160,7 @@ void display() {
 		glPopMatrix();
 	} else {
 		xHole_02 = 2.0;
+		zHole_02 += 0.1;
 
 		glPushMatrix();
 
