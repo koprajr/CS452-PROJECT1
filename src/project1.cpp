@@ -218,7 +218,7 @@ void display() {
 		glPopMatrix();
 
 		dead = intersect();
-		GLdouble sHole_01 = 15.00;
+		GLdouble angle = 15.00;
 		if( xHole_01 > (GLfloat) -2.00 ) {
 			xHole_01 -= sHole_01;
 
