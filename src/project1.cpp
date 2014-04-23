@@ -73,6 +73,19 @@ GLdouble hole_04_Angles[16];
 
 
 
+//  Just a pointer to a font style..
+//  Fonts supported by GLUT are: GLUT_BITMAP_8_BY_13, 
+//  GLUT_BITMAP_9_BY_15, GLUT_BITMAP_TIMES_ROMAN_10, 
+//  GLUT_BITMAP_TIMES_ROMAN_24, GLUT_BITMAP_HELVETICA_10,
+//  GLUT_BITMAP_HELVETICA_12, and GLUT_BITMAP_HELVETICA_18.
+GLvoid *font_style = GLUT_BITMAP_TIMES_ROMAN_24;
+
+//  printf prints to file. printw prints to window
+void printw (float x, float y, float z, char* format, ...);
+
+
+
+
 void display() {
 	GLfloat lightPosition[] = { 0.0, 30.0, 50.0, 0.0 };
 
@@ -151,8 +164,14 @@ void display() {
 
 	glPopMatrix();
 
+	if (xHole_01 == xSphere || xHole_02 == xSphere || xHole_03 == xSphere || xHole_04 == xSphere) {
+		glClear (GL_COLOR_BUFFER_BIT);
+		printw (-0.9, 0.3, 0, "%s", "you died =(");
+		glFlush();
+	}
 
-	GLdouble angle = 00.00; //15.00
+
+	GLdouble angle = 10.00; //15.00
 	if( xHole_01 > (GLfloat) -2.00 ) {
 		xHole_01 -= 0.0175f;
 
@@ -360,6 +379,10 @@ void camera(unsigned char key, int x, int y) {
 }
 
 void init() {
+
+	//  Set the frame buffer clear color to black. 
+	glClearColor (0.0, 0.0, 0.0, 0.0);
+
 	int i, j;
 	ifstream fs;
 	char temp[80];
