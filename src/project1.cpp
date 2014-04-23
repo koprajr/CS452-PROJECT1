@@ -50,6 +50,7 @@ Black Holes
 */
 GLUquadricObj* hole01;
 GLfloat rHole_01 = 0.15;
+GLfloat sHole_01 = 0.0175f;
 GLfloat xHole_01 = 2.5;
 GLfloat yHole_01 = 0.15;
 GLfloat zHole_01 = 0.3;
@@ -57,6 +58,7 @@ GLdouble hole_01_Angles[16];
 
 GLUquadricObj* hole02;
 GLfloat rHole_02 = 0.10;
+GLfloat sHole_02 = 0.0;
 GLfloat xHole_02 = 3.0;
 GLfloat yHole_02 = 0.15;
 GLfloat zHole_02 = -0.5;
@@ -64,6 +66,7 @@ GLdouble hole_02_Angles[16];
 
 GLUquadricObj* hole03;
 GLfloat rHole_03 = 0.25;
+GLfloat sHole_03 = 0.0;
 GLfloat xHole_03 = 4.1;
 GLfloat yHole_03 = 0.15;
 GLfloat zHole_03 = -1.0;
@@ -71,6 +74,7 @@ GLdouble hole_03_Angles[16];
 
 GLUquadricObj* hole04;
 GLfloat rHole_04 = 0.35;
+GLfloat sHole_04 = 0.0;
 GLfloat xHole_04 = 2.0;
 GLfloat yHole_04 = 0.15;
 GLfloat zHole_04 = 0.8;
@@ -214,10 +218,9 @@ void display() {
 		glPopMatrix();
 
 		dead = intersect();
-
-		GLdouble angle = 10.00; //15.00
+		GLdouble sHole_01 = 15.00;
 		if( xHole_01 > (GLfloat) -2.00 ) {
-			xHole_01 -= 0.0175f;
+			xHole_01 -= sHole_01;
 
 			glPushMatrix();
 
@@ -234,6 +237,8 @@ void display() {
 			if ( (rand() % 2) == 0){ 
 				zHole_01 = zHole_01 * (-1);
 			}
+
+			sHole_01 = (rand() % (20000-10000)) / 1000000.0;
 
 			glPushMatrix();
 
@@ -347,7 +352,7 @@ void display() {
 		glTexCoord2f(1.0, 0);
 		glVertex3f(-1.5, 0, 1.5);
 		glEnd();
-		
+
 		glPopMatrix();
 
 	}
