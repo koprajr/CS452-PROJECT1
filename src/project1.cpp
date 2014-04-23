@@ -42,7 +42,7 @@ GLdouble zCamera = 4.0;
 
 GLubyte sphereTexture[1024][1024][3];
 GLubyte planeTexture[1024][1024][3];
-GLubyte holeTexture[1024][1024][3];
+GLubyte holeTexture[100][100][3];
 
 /*
 Black Holes
@@ -58,6 +58,18 @@ GLfloat xHole_02 = 3.0;
 GLfloat yHole_02 = 0.15;
 GLfloat zHole_02 = -0.5;
 GLdouble hole_02_Angles[16];
+
+GLUquadricObj* hole03;
+GLfloat xHole_03 = 4.1;
+GLfloat yHole_03 = 0.15;
+GLfloat zHole_03 = -1.0;
+GLdouble hole_03_Angles[16];
+
+GLUquadricObj* hole02;
+GLfloat xHole_04 = 2.0;
+GLfloat yHole_04 = 0.15;
+GLfloat zHole_04 = 0.8;
+GLdouble hole_04_Angles[16];
 
 
 
@@ -105,7 +117,7 @@ void display() {
 	 */
 	glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+	glTexImage2D(GL_TEXTURE_2D,0,3,100,100,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_01, yHole_01, zHole_01);
 	glMultMatrixd(hole_01_Angles);
 	gluSphere(hole01, 0.15, 50, 50);
@@ -114,10 +126,28 @@ void display() {
 
 	glPushMatrix();
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+	glTexImage2D(GL_TEXTURE_2D,0,3,100,100,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_02, yHole_02, zHole_02);
 	glMultMatrixd(hole_02_Angles);
 	gluSphere(hole02, 0.15, 50, 50);
+
+	glPopMatrix();
+
+	glPushMatrix();
+
+	glTexImage2D(GL_TEXTURE_2D,0,3,100,100,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+	glTranslatef(xHole_03, yHole_03, zHole_03);
+	glMultMatrixd(hole_03_Angles);
+	gluSphere(hole03, 0.15, 50, 50);
+
+	glPopMatrix();
+
+	glPushMatrix();
+
+	glTexImage2D(GL_TEXTURE_2D,0,3,100,100,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
+	glTranslatef(xHole_04, yHole_04, zHole_04);
+	glMultMatrixd(hole_04_Angles);
+	gluSphere(hole04, 0.15, 50, 50);
 
 	glPopMatrix();
 
@@ -177,6 +207,64 @@ void display() {
 		glRotated(-angle,0,2.0,0);
 		glMultMatrixd(hole_02_Angles);
 		glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
+
+		glPopMatrix();
+	}
+
+	if( xHole_03 > (GLfloat) -2.00 ) {
+		xHole_03 -= 0.0125f;
+
+		glPushMatrix();
+
+		glLoadIdentity();
+		glRotated(angle,0,1.0,0);
+		glMultMatrixd(hole_03_Angles);
+		glGetDoublev(GL_MODELVIEW_MATRIX, hole_03_Angles);
+
+		glPopMatrix();
+	} else {
+		xHole_03 = 2.0;
+		
+		zHole_03 = (rand() % (150-0)) / 100.0;
+		if ( (rand() % 2) == 0){ 
+			zHole_03 = zHole_03 * (-1);
+		}
+
+		glPushMatrix();
+
+		glLoadIdentity();
+		glRotated(-angle,0,2.0,0);
+		glMultMatrixd(hole_02_Angles);
+		glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
+
+		glPopMatrix();
+	}
+
+	if( xHole_04 > (GLfloat) -2.00 ) {
+		xHole_04 -= 0.0105f;
+
+		glPushMatrix();
+
+		glLoadIdentity();
+		glRotated(angle,0,1.0,0);
+		glMultMatrixd(hole_04_Angles);
+		glGetDoublev(GL_MODELVIEW_MATRIX, hole_04_Angles);
+
+		glPopMatrix();
+	} else {
+		xHole_04 = 2.0;
+		
+		zHole_04 = (rand() % (150-0)) / 100.0;
+		if ( (rand() % 2) == 0){ 
+			zHole_04 = zHole_04 * (-1);
+		}
+
+		glPushMatrix();
+
+		glLoadIdentity();
+		glRotated(-angle,0,2.0,0);
+		glMultMatrixd(hole_04_Angles);
+		glGetDoublev(GL_MODELVIEW_MATRIX, hole_04_Angles);
 
 		glPopMatrix();
 	}
@@ -319,11 +407,11 @@ void init() {
 	fs.getline(temp, 80);
 	fs.getline(temp, 80);
 	fs.getline(temp, 80);
-	for( i = 0; i < 1024; i++ ) {
-		for( j = 0; j < 1024; j++ ) {
-			holeTexture[i][1023-j][0] = (GLubyte) fs.get();
-			holeTexture[i][1023-j][1] = (GLubyte) fs.get();
-			holeTexture[i][1023-j][2] = (GLubyte) fs.get();
+	for( i = 0; i < 100; i++ ) {
+		for( j = 0; j < 100; j++ ) {
+			holeTexture[i][99-j][0] = (GLubyte) fs.get();
+			holeTexture[i][99-j][1] = (GLubyte) fs.get();
+			holeTexture[i][99-j][2] = (GLubyte) fs.get();
 		}
 	}
 	fs.close();
@@ -382,6 +470,30 @@ void init() {
 
 	glLoadIdentity();
 	glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
+
+	glPopMatrix();
+
+	hole03 = gluNewQuadric();
+	gluQuadricDrawStyle(hole03, GLU_FILL);
+	gluQuadricNormals(hole03, GLU_SMOOTH);
+	gluQuadricTexture(hole03, GL_TRUE);
+
+	glPushMatrix();
+
+	glLoadIdentity();
+	glGetDoublev(GL_MODELVIEW_MATRIX, hole_03_Angles);
+
+	glPopMatrix();
+
+	hole04 = gluNewQuadric();
+	gluQuadricDrawStyle(hole04, GLU_FILL);
+	gluQuadricNormals(hole04, GLU_SMOOTH);
+	gluQuadricTexture(hole04, GL_TRUE);
+
+	glPushMatrix();
+
+	glLoadIdentity();
+	glGetDoublev(GL_MODELVIEW_MATRIX, hole_04_Angles);
 
 	glPopMatrix();
 
