@@ -42,6 +42,7 @@ GLdouble zCamera = 4.0;
 
 GLubyte sphereTexture[1024][1024][3];
 GLubyte planeTexture[1024][1024][3];
+GLubyte planeTextureEND[1024][1024][3];
 GLubyte holeTexture[1024][1024][3];
 
 /*
@@ -165,8 +166,24 @@ void display() {
 	glPopMatrix();
 
 	if (xHole_01 == xSphere || xHole_02 == xSphere || xHole_03 == xSphere || xHole_04 == xSphere) {
-		glClear (GL_COLOR_BUFFER_BIT);
-		printw (-0.9, 0.3, 0, "%s", "you died =(");
+		while (1) {
+			glPushMatrix();
+
+			glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, planeTextureEND);
+			glBegin(GL_POLYGON);
+			glTexCoord2f(0, 0);
+			glVertex3f(1.5, 0, 1.5);
+			glTexCoord2f(0, 1.0);
+			glVertex3f(1.5, 0, -1.5);
+			glTexCoord2f(1.0, 1.0);
+			glVertex3f(-1.5, 0, -1.5);
+			glTexCoord2f(1.0, 0);
+			glVertex3f(-1.5, 0, 1.5);
+			glEnd();
+
+			glPopMatrix();
+		}
+
 		glFlush();
 	}
 
@@ -448,6 +465,19 @@ void init() {
 			planeTexture[i][1023-j][0] = (GLubyte) fs.get();
 			planeTexture[i][1023-j][1] = (GLubyte) fs.get();
 			planeTexture[i][1023-j][2] = (GLubyte) fs.get();
+		}
+	}
+	fs.close();
+
+	fs.open("spaceEND.ppm");
+	fs.getline(temp, 80);
+	fs.getline(temp, 80);
+	fs.getline(temp, 80);
+	for( i = 0; i < 1024; i++ ) {
+		for( j = 0; j < 1024; j++ ) {
+			planeTextureEND[i][1023-j][0] = (GLubyte) fs.get();
+			planeTextureEND[i][1023-j][1] = (GLubyte) fs.get();
+			planeTextureEND[i][1023-j][2] = (GLubyte) fs.get();
 		}
 	}
 	fs.close();
