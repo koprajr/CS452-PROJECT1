@@ -386,32 +386,6 @@ void init() {
 	glPopMatrix();
 
 
-
-	hole01 = gluNewQuadric();
-	gluQuadricDrawStyle(hole01, GLU_FILL);
-	gluQuadricNormals(hole01, GLU_SMOOTH);
-	gluQuadricTexture(hole01, GL_TRUE);
-
-	glPushMatrix();
-
-	glLoadIdentity();
-	glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
-
-	glPopMatrix();
-
-	
-	hole02 = gluNewQuadric();
-	gluQuadricDrawStyle(hole02, GLU_FILL);
-	gluQuadricNormals(hole02, GLU_SMOOTH);
-	gluQuadricTexture(hole02, GL_TRUE);
-
-	glPushMatrix();
-
-	glLoadIdentity();
-	glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
-
-	glPopMatrix();
-
 }
 
 void reshape(int width, int height) {
@@ -439,10 +413,6 @@ int main(int argc, char **argv) {
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
-	
-	/*while (1) {
-		moveBlackHoles();
-	}*/
 
 	glutMainLoop();
 
