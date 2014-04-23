@@ -238,7 +238,7 @@ void display() {
 				zHole_01 = zHole_01 * (-1);
 			}
 
-			sHole_01 = (rand() % (20000-10000)) / 1000000.0;
+			sHole_01 = (rand() % (150000-10000)) / 1000000.0;
 
 			glPushMatrix();
 
@@ -269,7 +269,7 @@ void display() {
 				zHole_02 = zHole_02 * (-1);
 			}
 
-			sHole_02 = (rand() % (20000-10000)) / 1000000.0;
+			sHole_02 = (rand() % (150000-10000)) / 1000000.0;
 
 			glPushMatrix();
 
@@ -300,7 +300,7 @@ void display() {
 				zHole_03 = zHole_03 * (-1);
 			}
 
-			sHole_03 = (rand() % (20000-10000)) / 1000000.0;
+			sHole_03 = (rand() % (150000-10000)) / 1000000.0;
 
 			glPushMatrix();
 
@@ -331,7 +331,7 @@ void display() {
 				zHole_04 = zHole_04 * (-1);
 			}
 
-			sHole_04 = (rand() % (20000-10000)) / 1000000.0;
+			sHole_04 = (rand() % (150000-10000)) / 1000000.0;
 
 			glPushMatrix();
 
