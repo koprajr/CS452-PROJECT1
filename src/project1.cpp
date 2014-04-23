@@ -81,6 +81,7 @@ GLfloat zHole_04 = 0.8;
 GLdouble hole_04_Angles[16];
 
 bool dead = false;
+int score = 0;
 
 
 
@@ -248,6 +249,7 @@ void display() {
 			glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
 
 			glPopMatrix();
+			score++;
 		}
 
 		if( xHole_02 > (GLfloat) -2.00 ) {
@@ -279,6 +281,7 @@ void display() {
 			glGetDoublev(GL_MODELVIEW_MATRIX, hole_02_Angles);
 
 			glPopMatrix();
+			score++;
 		}
 
 		if( xHole_03 > (GLfloat) -2.00 ) {
@@ -310,6 +313,7 @@ void display() {
 			glGetDoublev(GL_MODELVIEW_MATRIX, hole_03_Angles);
 
 			glPopMatrix();
+			score++;
 		}
 
 		if( xHole_04 > (GLfloat) -2.00 ) {
@@ -341,6 +345,7 @@ void display() {
 			glGetDoublev(GL_MODELVIEW_MATRIX, hole_04_Angles);
 
 			glPopMatrix();
+			score++;
 		}
 
 	} else {
@@ -360,6 +365,8 @@ void display() {
 		glEnd();
 
 		glPopMatrix();
+
+		fprintf(stderr,"Game Over, your score is: %d \n",score);
 
 	}
 
