@@ -22,8 +22,8 @@ GLfloat xSphere = 0.0;
 GLfloat ySphere = 0.15;
 GLfloat zSphere = 0.0;
 
-GLdouble xCamera = 2.0;
-GLdouble yCamera = 2.0;
+GLdouble xCamera = 0.0;
+GLdouble yCamera = 150.0;
 GLdouble zCamera = 4.0;
 
 GLubyte sphereTexture[1024][1024][3];
@@ -160,8 +160,8 @@ void init() {
 	char temp[80];
 
 	GLfloat diffuseLighting[] = { 1, 1, 1, 1 };
-	GLfloat ambientLighting[] = { 0.5, 0.5, 0.5, 1.0 };
-	GLfloat specularLighting[] = { 0.7, 0.7, 0.7, 1.0 };
+	GLfloat ambientLighting[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat specularLighting[] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat specter[] = { 1.0, 1.0, 1.0, 1.0 };
 
 	glClearColor( 0, 0, 0, 0 );
@@ -234,7 +234,7 @@ void reshape(int width, int height) {
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(45.0f, (float) 800 / (float) 600, 0.1f, 1000.0f);
+	gluPerspective(1.0f, (float) 1024 / (float) 1024, 0.1f, 1000.0f);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -243,7 +243,7 @@ void reshape(int width, int height) {
 int main(int argc, char **argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(1024, 1024);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("Project 01");
 
