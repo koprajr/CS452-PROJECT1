@@ -366,7 +366,30 @@ void display() {
 
 		glPopMatrix();
 
+		std::cout<<"Game Over, your score is: "<<score<<"\n";
 		fprintf(stderr,"Game Over, your score is: %d \n",score);
+
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		gluOrtho2D(0.0, WIN_WIDTH, 0.0, WIN_HEIGHT);
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+		glColor3f(0.0, 1.0, 0.0);
+		glRasterPos2i(10, 10);
+		string s = "Game Over, your score is:" + std::to_string(score);
+		void * font = GLUT_BITMAP_9_BY_15;
+		for (string::iterator i = s.begin(); i != s.end(); ++i)
+		{
+		    char c = *i;
+		    glutBitmapCharacter(font, c);
+		}
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
 
 	}
 
