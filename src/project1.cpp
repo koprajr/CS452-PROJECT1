@@ -49,24 +49,28 @@ GLubyte holeTexture[1024][1024][3];
 Black Holes
 */
 GLUquadricObj* hole01;
+GLfloat rHole_01 = 0.15;
 GLfloat xHole_01 = 2.5;
 GLfloat yHole_01 = 0.15;
 GLfloat zHole_01 = 0.3;
 GLdouble hole_01_Angles[16];
 
 GLUquadricObj* hole02;
+GLfloat rHole_02 = 0.10;
 GLfloat xHole_02 = 3.0;
 GLfloat yHole_02 = 0.15;
 GLfloat zHole_02 = -0.5;
 GLdouble hole_02_Angles[16];
 
 GLUquadricObj* hole03;
+GLfloat rHole_03 = 0.25;
 GLfloat xHole_03 = 4.1;
 GLfloat yHole_03 = 0.15;
 GLfloat zHole_03 = -1.0;
 GLdouble hole_03_Angles[16];
 
 GLUquadricObj* hole04;
+GLfloat rHole_04 = 0.35;
 GLfloat xHole_04 = 2.0;
 GLfloat yHole_04 = 0.15;
 GLfloat zHole_04 = 0.8;
@@ -85,6 +89,45 @@ GLvoid *font_style = GLUT_BITMAP_TIMES_ROMAN_24;
 void printw (float x, float y, float z, char* format, ...);
 
 
+bool intersect()
+{
+    
+    float X = xSphere;               
+    float Y = zSphere;   
+
+	/* Circle equation (x - h)^2 + (y - k)^2 = r^2....Basically you just have to find the distance between the two centers.
+Now take the two radii and add them up. If they are less than this distance, they won't intersect. */
+
+	float X_01 = xHole_01 - X;
+	float Y_01 = zHole_01 - Y;
+
+	float X_02 = xHole_02 - X;
+	float Y_02 = zHole_02 - Y;
+
+	float X_03 = xHole_03 - X;
+	float Y_03 = zHole_03 - Y;
+
+	float X_04 = xHole_04 - X;
+	float Y_04 = zHole_04 - Y;
+
+
+	float D_01 = sqrt( (X_01*X_01 + Y_01*Y_01) );   // distance between two centers
+	float D_02 = sqrt( (X_02*X_02 + Y_02*Y_02) );
+	float D_03 = sqrt( (X_03*X_03 + Y_03*Y_03) );
+	float D_04 = sqrt( (X_04*X_04 + Y_04*Y_04) );
+
+
+	float sumRad_01 = rHole_01 + 0.15;
+	float sumRad_02 = rHole_02 + 0.15;
+	float sumRad_03 = rHole_03 + 0.15;
+	float sumRad_04 = rHole_04 + 0.15;
+
+	// Testing for overlap
+	if (D_01 < sumRad_01 || D_02 < sumRad_02 || D_03 < sumRad_03 || D_04 < sumRad_04 )
+		return true; // true means they intersect
+	else
+		return false;
+}
 
 
 void display() {
@@ -134,7 +177,7 @@ void display() {
 	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_01, yHole_01, zHole_01);
 	glMultMatrixd(hole_01_Angles);
-	gluSphere(hole01, 0.15, 50, 50);
+	gluSphere(hole01, rHole_01, 50, 50);
 
 	glPopMatrix();
 
@@ -143,7 +186,7 @@ void display() {
 	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_02, yHole_02, zHole_02);
 	glMultMatrixd(hole_02_Angles);
-	gluSphere(hole02, 0.10, 50, 50);
+	gluSphere(hole02, rHole_02, 50, 50);
 
 	glPopMatrix();
 
@@ -152,7 +195,7 @@ void display() {
 	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_03, yHole_03, zHole_03);
 	glMultMatrixd(hole_03_Angles);
-	gluSphere(hole03, 0.25, 50, 50);
+	gluSphere(hole03, rHole_03, 50, 50);
 
 	glPopMatrix();
 
@@ -161,11 +204,12 @@ void display() {
 	glTexImage2D(GL_TEXTURE_2D,0,3,1024,1024,0,GL_RGB,GL_UNSIGNED_BYTE, holeTexture);
 	glTranslatef(xHole_04, yHole_04, zHole_04);
 	glMultMatrixd(hole_04_Angles);
-	gluSphere(hole04, 0.35, 50, 50);
+	gluSphere(hole04, rHole_04, 50, 50);
 
 	glPopMatrix();
 
-	if (xHole_01 == xSphere || xHole_02 == xSphere || xHole_03 == xSphere || xHole_04 == xSphere) {
+	bool dead = intersect();
+	if (dead) {
 		while (1) {
 			glPushMatrix();
 
