@@ -107,6 +107,35 @@ void display() {
 	glPopMatrix();
 
 
+	GLdouble angle = 5.625;
+	if( xHole_01 > (GLfloat) -1.35 ) {
+		xHole_01 -= 0.0375f;
+
+		glPushMatrix();
+
+		glLoadIdentity();
+		glRotated(angle,0,0,1.0);
+		glMultMatrixd(hole_01_Angles);
+		glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
+
+		glPopMatrix();
+	} else {
+		xHole_01 += 1.0000f;
+
+		glPushMatrix();
+
+		glLoadIdentity();
+		glRotated(-angle,0,0,1.0);
+		glMultMatrixd(hole_01_Angles);
+		glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
+
+		glPopMatrix();
+	}
+
+
+	
+
+
 	glutSwapBuffers();
 	glutPostRedisplay();
 }
@@ -168,29 +197,6 @@ void ball(int key, int x, int y) {
 		glPopMatrix();
 	}
 
-	if( xHole_01 > (GLfloat) -1.35 ) {
-		xHole_01 -= 0.0375f;
-
-		glPushMatrix();
-
-		glLoadIdentity();
-		glRotated(angle,0,0,1.0);
-		glMultMatrixd(hole_01_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
-
-		glPopMatrix();
-	} else {
-		xHole_01 += 1.0000f;
-
-		glPushMatrix();
-
-		glLoadIdentity();
-		glRotated(-angle,0,0,1.0);
-		glMultMatrixd(hole_01_Angles);
-		glGetDoublev(GL_MODELVIEW_MATRIX, hole_01_Angles);
-
-		glPopMatrix();
-	}
 }
 
 void camera(unsigned char key, int x, int y) {
