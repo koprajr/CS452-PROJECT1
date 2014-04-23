@@ -8,6 +8,19 @@
  *	g++ -Wall -o run-me project1.cpp -lGL -lGLU -lglut
  *
  */
+/*
+ * Camera movement:
+ * 	X-axis: A and D
+ * 	Y-axis: S and W
+ * 	Z-axis: Q and E
+ * 
+ * Ball Rolling:
+ * 	Arrow keys
+ * 
+ * requires libraries:
+ * 	GL, GLU, and glut
+*/
+
 #include <GL/glut.h>
 #include <cstdlib>
 #include <iostream>
